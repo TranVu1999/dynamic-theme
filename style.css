@@ -1,0 +1,9 @@
+.list-colors .color-item {
+    width: 100%;
+    line-height: 40px;
+    text-align: center;
+}
+
+.list-colors .color-item+.color-item {
+    margin-top: 3px;
+}

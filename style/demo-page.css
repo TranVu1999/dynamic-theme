@@ -1,0 +1,124 @@
+body {
+    font-size: 13px;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f1f3f7;
+}
+
+button {
+    font-size: inherit!important;
+    font-weight: inherit!important;
+}
+
+.btn:disabled {
+    border-color: transparent;
+}
+
+svg {
+    fill: currentColor;
+}
+
+.line-height-1 {
+    line-height: 1;
+}
+
+.border-right {
+    border-right: 1px solid rgba(51,78,106,.1)!important;
+}
+
+.border-left {
+    border-left: 1px solid rgba(51,78,106,.1)!important;
+}
+
+.border-top {
+    border-top: 1px solid rgba(51,78,106,.1)!important;
+}
+
+.border-bottom {
+    border-bottom: 1px solid rgba(51,78,106,.1)!important;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+/* Left Menu */
+.group-buttons {
+    gap: 4px;
+}
+
+.group-buttons .btn-control{
+    width: calc((100% - 4px) / 2);
+}
+
+.group-buttons .btn-control.btn-control--full{
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.menu-tab .rounded-top {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.menu .menu-item {
+    line-height: 34px;
+}
+
+.menu .icon {
+    width: 16px;
+}
+
+/* Main Content */
+
+.group-event {
+    font-size: 11px;
+}
+
+.group-event__title {
+    line-height: 36px;
+}
+
+.group-event__title .icon{
+    width: 24px;
+}
+
+.group-event__type {
+    border-radius: 3px;
+}
+
+.group-event__header .time-column,
+.group-event__header .more-market-column,
+.group-events .time-column,
+.group-events .more-market-column{
+    width: 55px;
+}
+
+.group-event__header .favorite-column,
+.group-events  .favorite-column {
+    width: 30px;
+}
+
+.group-event__header .bet-group-column, {
+    width: 30%;
+}
+
+.group-event__header .bet-type-column,
+.group-events .bet-type-column {
+    width: 10%;
+}
+
+.group-events .opponent-column {
+    font-weight: 500;
+}
+
+.group-events .bet-type-column .odd-number {
+    gap: 10px;
+}
+
+.league-event-header svg,
+.group-event__header svg,
+.group-events svg {
+    fill: none;
+    width: 16px;
+}
+
