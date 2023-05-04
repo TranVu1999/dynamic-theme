@@ -1,4 +1,7 @@
-const numberColors = 36;
+const numberColors = 10;
+const oneDimensionalColorTable = [];
+const twoDimensionalColorTable = [];
+let count = 0;
 
 var style = document.createElement('style');
 style.innerHTML = ``;
@@ -6,30 +9,12 @@ resultClasses = '';
 document.getElementsByTagName('head')[0].appendChild(style);
 const fraction = 1 / (numberColors - 1);
 
+// return true if the color is light, otherwise return false.
 function lightOrDark(color) {
 
-    // Check the format of the color, HEX or RGB?
-    if (color.match(/^rgb/)) {
-
-      // If HEX --> store the red, green, blue values in separate variables
-      color = color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
-
-      r = color[1];
-      g = color[2];
-      b = color[3];
-    }
-    else {
-
-      // If RGB --> Convert it to HEX: http://gist.github.com/983661
-      color = +("0x" + color.slice(1).replace(
-        color.length < 5 && /./g, '$&$&'
-      )
-               );
-
-      r = color >> 16;
-      g = color >> 8 & 255;
-      b = color & 255;
-    }
+    r = color[1];
+    g = color[2];
+    b = color[3];
 
     // HSP equation from http://alienryderflex.com/hsp.html
     hsp = Math.sqrt(
@@ -65,7 +50,7 @@ var _interpolateColor = function(color1, color2, factor) {
     var result = color1.slice();
 
     for (var i = 0; i < 3; i++) {
-        result[i] = Math.round(result[i] + factor*(color2[i]-color1[i]));
+        result[i] = Math.round(result[i] + factor * (color2[i] - color1[i]));
     }
     return result;
 };
@@ -75,6 +60,7 @@ function createColors(prefix, originalColor) {
     for(let idx = 0; idx < numberColors; idx++) {
         const icol = _interpolateColor(originalColor, [255, 255, 255], fraction * idx);
         const hcol = r2h(icol);
+        oneDimensionalColorTable.push(icol);
 
         resultClasses += `
             .bg-${prefix}-${idx} {
@@ -96,8 +82,6 @@ function createColors(prefix, originalColor) {
             }
         `;
     }
-
-    localStorage.setItem('theme', resultClasses);
 }
 
 function renderListColorItems(prefix, idElement) {
@@ -160,3 +144,59 @@ renderListColorItems('color2', 'listColors2');
 renderListColorItems('color3', 'listColors3');
 renderListColorItems('color4', 'listColors4');
 renderListColorItems('color5', 'listColors5');
+
+function calContrastion(color1, color2) {
+    return Math.sqrt(Math.pow(color1[0] - color2[0], 2) + Math.pow(color1[1] - color2[1], 2) + Math.pow(color1[2] - color2[2], 2));
+}
+
+const listColors0000Elm = document.getElementById('listColors0000');
+
+function createCombineBackgroundAndColor() {
+    for(let i = 0; i < oneDimensionalColorTable.length; i++) {
+        for(let j = 0; j < oneDimensionalColorTable.length; j++) {
+            const bgColor = oneDimensionalColorTable[i];
+            const textColor = oneDimensionalColorTable[j];
+
+            if(Math.abs(i % numberColors - j % numberColors) > 4) {
+                if(calContrastion(bgColor, textColor) > 140) {
+                    count++;
+                    listColors0000Elm.innerHTML += `<div
+                        class="col-2 color-picker bg-${Math.floor(i / numberColors) }-${i % numberColors}--text-${Math.floor(j / numberColors) }-${j % numberColors}"
+                    >
+                        bg-${Math.floor(i / numberColors) }-${i % numberColors}--text-${Math.floor(j / numberColors) }-${j % numberColors}
+                    </div>`;
+
+                    style.innerHTML += `
+                        .bg-${Math.floor(i / numberColors) }-${i % numberColors}--text-${Math.floor(j / numberColors) }-${j % numberColors} {
+                            color: rgb(${textColor[0]}, ${textColor[1]}, ${textColor[2]});
+                            background-color: rgb(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]});
+                        }
+                    `;
+                    resultClasses += `
+                        .bg-${Math.floor(i / numberColors) }-${i % numberColors}--text-${Math.floor(j / numberColors) }-${j % numberColors} {
+                            color: rgb(${textColor[0]}, ${textColor[1]}, ${textColor[2]});
+                            background-color: rgb(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]});
+                        }
+                    `;
+                } else {
+                    resultClasses += `
+                        .bg-${Math.floor(i / numberColors) }-${i % numberColors}--text-${Math.floor(j / numberColors) }-${j % numberColors} {
+                            color: inherit;
+                            background-color: transparent;
+                        }
+                    `;
+                }
+            }
+
+        }
+    }
+}
+
+createCombineBackgroundAndColor();
+localStorage.setItem('theme', resultClasses);
+console.log('count: ', count);
+
+
+// console.log('calContrastion: ', calContrastion([247, 227, 227], [145, 148, 155]))
+
+// console.log('constract ratio: ', lightOrDark('#e2a225'));

@@ -10,14 +10,8 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    Interim steps: <input type="range" id="numsteps" value="10" min="1" max="20" />
 
-    <ul id="list">
-        <li id="start"><input type="color" value="#ff0000" size="7" /><span></span></li>
-
-        <li id="end"><input type="color" value="#000000" size="7" /><span></span></li>
-    </ul>
-
+    <!-- All colors are standarded -->
     <div class="container-fluid">
         <div class="row">
             <!--Color 0 -->
@@ -25,6 +19,7 @@
                 <div class="mb-3 d-flex">
                     <span class="me-4">Color 0</span>
                     <input type="color" value="#400002" size="7" id="mainColor0"/>
+                    <!-- 400002 004208 240042 ffffff -->
                 </div>
 
                 <ul id="listColors0" class="list-inline list-colors"></ul>
@@ -35,6 +30,7 @@
                 <div class="mb-3 d-flex">
                     <span class="me-4">Color 1</span>
                     <input type="color" value="#b50005" size="7" id="mainColor1"/>
+                    <!-- b50005 ffffff -->
                 </div>
 
                 <ul id="listColors1" class="list-inline list-colors"></ul>
@@ -43,8 +39,9 @@
             <!-- Color 2-->
             <div class="col">
                 <div class="mb-3 d-flex">
-                    <span class="me-4">Primary Color</span>
+                    <span class="me-4">Color 2</span>
                     <input type="color" value="#e2a225" size="7" id="mainColor2"/>
+                    <!-- e2a225 ffffff-->
                 </div>
 
                 <ul id="listColors2" class="list-inline list-colors"></ul>
@@ -55,6 +52,7 @@
                 <div class="mb-3 d-flex">
                     <span class="me-4">Color 3</span>
                     <input type="color" value="#91949b" size="7" id="mainColor3"/>
+                    <!-- 91949b ffffff -->
                 </div>
 
                 <ul id="listColors3" class="list-inline list-colors"></ul>
@@ -65,6 +63,7 @@
                 <div class="mb-3 d-flex">
                     <span class="me-4">Color 4</span>
                     <input type="color" value="#ff6600" size="7" id="mainColor4"/>
+                    <!-- ff6600 ffffff -->
                 </div>
 
                 <ul id="listColors4" class="list-inline list-colors"></ul>
@@ -75,12 +74,14 @@
                 <div class="mb-3 d-flex">
                     <span class="me-4">Color 5</span>
                     <input type="color" value="#009ece" size="7" id="mainColor5"/>
+                    <!-- 009ece ffffff-->
                 </div>
-
                 <ul id="listColors5" class="list-inline list-colors"></ul>
             </div>
         </div>
     </div>
+
+    <div id="listColors0000" class="mt-5 row list-colors"></div>
 
     <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
     <script src="./js/render-list-colors.js"></script>

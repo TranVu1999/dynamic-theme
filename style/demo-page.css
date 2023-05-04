@@ -122,3 +122,8 @@ svg {
     width: 16px;
 }
 
+
+.bg-default {
+    background-color: #fff;
+    color: #000;
+}
